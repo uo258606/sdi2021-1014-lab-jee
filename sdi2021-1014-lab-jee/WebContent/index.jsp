@@ -17,7 +17,6 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-
 	<jsp:useBean id="contador" class="com.uniovi.sdi.Contador"
 		scope="application" />
 	<jsp:setProperty name="contador" property="incremento" value="1" />
@@ -29,6 +28,8 @@
 			<li><a href="incluirEnCarrito">Carrito</a></li>
 			<li><a href="login.jsp">Login</a></li>
 			<li><a href="admin.jsp">Administrar productos</a></li>
+			<li><a href="ServletComentarios">Opiniones</a></li>
+			<li><a href="comentarios.jsp">Opinar</a></li>
 		</ul>
 		<div class="nav navbar-right">
 			<div class="center-block">
