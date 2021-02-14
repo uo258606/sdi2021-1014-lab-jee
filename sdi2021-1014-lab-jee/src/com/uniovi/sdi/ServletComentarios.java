@@ -32,7 +32,7 @@ public class ServletComentarios extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		HttpSession session = request.getSession();
+		HttpSession session = request.getSession(); 
 		HashMap<String, String> comentarios = (HashMap<String, String>) request.getSession().getAttribute("comentarios");
 //			No	hay	carrito,	creamos	uno	y	lo	insertamos	en	sesión
 		if (comentarios == null) {
