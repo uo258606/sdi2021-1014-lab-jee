@@ -8,6 +8,9 @@ import com.uniovi.entities.*;
 import com.uniovi.services.*;
 import org.springframework.security.core.*;
 import org.springframework.security.core.context.*;
+import com.uniovi.validators.*;
+import org.springframework.validation.*;
+import org.springframework.validation.annotation.Validated;
 
 @Controller
 public class UsersController {
@@ -17,6 +20,9 @@ public class UsersController {
 
 	@Autowired
 	private SecurityService securityService;
+
+	@Autowired
+	private SignUpFormValidator signUpFormValidator;
 
 	@RequestMapping("/user/list")
 	public String getListado(Model model) {
@@ -63,12 +69,18 @@ public class UsersController {
 	}
 
 	@RequestMapping(value = "/signup", method = RequestMethod.GET)
-	public String signup() {
+	public String signup(Model model) {
+		model.addAttribute("user", new User());
 		return "signup";
 	}
 
 	@RequestMapping(value = "/signup", method = RequestMethod.POST)
-	public String signup(@ModelAttribute("user") User user, Model model) {
+	public String signup(@Validated User user, BindingResult result) {
+		signUpFormValidator.validate(user, result);
+		if (result.hasErrors()) {
+			return "signup";
+		}
+		
 		usersService.addUser(user);
 		securityService.autoLogin(user.getDni(), user.getPasswordConfirm());
 		return "redirect:home";
