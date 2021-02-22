@@ -6,10 +6,9 @@
 
 
 	<div class="container">
-		<h2>Notas</h2>
-		<p>Las notas que actualmente figuran en el sistema son las
-			siguientes:</p>
-		<button type="button" id="updateButton" class="btn btn-default">Actualizar</button>
+		<h2 th:text="#{mark.head}"></h2>
+		<p th:text="#{mark.subhead}"></p>
+		<button type="button" id="updateButton" class="btn btn-default" th:text="#{mark.update}">Actualizar</button>
 		<script>
 			$("#updateButton").click(function() {
 				$("#tableMarks").load('/mark/list/update');
@@ -20,9 +19,9 @@
 				id="tableMarks">
 				<thead>
 					<tr>
-						<th class="col-md-1">id</th>
-						<th>Descripción</th>
-						<th>Puntuación</th>
+						<th class="col-md-1"  th:text="#{mark.id}">id</th>
+						<th th:text="#{mark.descrip}">Descripción</th>
+						<th th:text="#{mark.score}">Puntuación</th>
 						<th class="col-md-1"></th>
 						<th class="col-md-1"></th>
 						<th class="col-md-1"></th>
@@ -33,9 +32,9 @@
 						<td th:text="${mark.id}">1</td>
 						<td th:text="${mark.description}">Ejercicio 1</td>
 						<td th:text="${mark.score}">10</td>
-						<td><a th:href="${'/mark/details/' + mark.id}">detalles</a></td>
-						<td><a th:href="${'/mark/edit/' + mark.id}">modificar</a></td>
-						<td><a th:href="${'/mark/delete/' + mark.id}">eliminar</a></td>
+						<td><a th:href="${'/mark/details/' + mark.id}" th:text="#{mark.details}">detalles</a></td>
+						<td><a th:href="${'/mark/edit/' + mark.id}" th:text="#{mark.modify}">modificar</a></td>
+						<td><a th:href="${'/mark/delete/' + mark.id}" th:text="#{mark.delete}">eliminar</a></td>
 					</tr>
 				</tbody>
 			</table>
