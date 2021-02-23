@@ -4,8 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.uniovi.entities.*;
 import com.uniovi.services.*;
+import com.uniovi.validators.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.*;
+import org.springframework.validation.annotation.Validated;
 
 @Controller
 public class MarksControllers {
@@ -16,6 +19,9 @@ public class MarksControllers {
 	@Autowired
 	private UsersService usersService;
 
+	@Autowired
+	private MarkValidator markValidator;
+
 	@RequestMapping("/mark/list")
 	public String getList(Model model) {
 		model.addAttribute("markList", marksService.getMarks());
@@ -23,7 +29,7 @@ public class MarksControllers {
 	}
 
 	@RequestMapping(value = "/mark/add")
-	public String getMark(Model model){
+	public String getMark(Model model) {
 		model.addAttribute("usersList", usersService.getUsers());
 		return "mark/add";
 	}
@@ -36,7 +42,13 @@ public class MarksControllers {
 	}
 
 	@RequestMapping(value = "/mark/edit/{id}", method = RequestMethod.POST)
-	public String setEdit(Model model, @PathVariable Long id, @ModelAttribute Mark mark) {
+	public String setEdit(@PathVariable Long id, @Validated Mark mark, BindingResult result) {
+
+		markValidator.validate(mark, result);
+		if (result.hasErrors()) {
+			return "mark/edit" + id;
+		}
+
 		Mark original = marksService.getMark(id);
 		// modificar solo score y description
 		original.setScore(mark.getScore());
