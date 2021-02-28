@@ -1,7 +1,7 @@
 package com.uniovi.services;
 
 import org.springframework.stereotype.Service;
-import com.uniovi.entities.Mark;
+import com.uniovi.entities.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.uniovi.repositories.*;
 import java.util.*;
@@ -56,6 +56,17 @@ public class MarksService {
 			marksRepository.updateResend(revised, id);
 		}
 
+	}
+
+	public List<Mark> getMarksForUser(User user) {
+		List<Mark> marks = new ArrayList<Mark>();
+		if (user.getRole().equals("ROLE_STUDENT")) {
+			marks = marksRepository.findAllByUser(user);
+		}
+		if (user.getRole().equals("ROLE_PROFESSOR")) {
+			marks = getMarks();
+		}
+		return marks;
 	}
 
 }
