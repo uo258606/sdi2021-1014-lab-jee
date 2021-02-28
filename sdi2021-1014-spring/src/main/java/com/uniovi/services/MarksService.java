@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.uniovi.repositories.*;
 import java.util.*;
 import javax.servlet.http.*;
+import org.springframework.security.core.context.*;
+import org.springframework.security.core.*;
 
 @Service
 public class MarksService {
@@ -44,6 +46,16 @@ public class MarksService {
 		consultedList.add(obtainedmark);
 		httpSession.setAttribute("consultedList", consultedList);
 		return obtainedmark;
+	}
+
+	public void setMarkResend(boolean revised, Long id) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String dni = auth.getName();
+		Mark mark = marksRepository.findById(id).get();
+		if (mark.getUser().getDni().equals(dni)) {
+			marksRepository.updateResend(revised, id);
+		}
+
 	}
 
 }

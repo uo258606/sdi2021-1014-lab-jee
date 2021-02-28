@@ -9,10 +9,12 @@ public class Mark {
 	@Id
 	@GeneratedValue
 	private Long id;
-	
+
 	private String description;
 	private Double score;
-	
+
+	private Boolean resend = false;
+
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
@@ -23,7 +25,7 @@ public class Mark {
 		this.description = description;
 		this.score = score;
 	}
-	
+
 	public Mark(String description, Double score, User user) {
 		super();
 		this.description = description;
@@ -32,6 +34,14 @@ public class Mark {
 	}
 
 	public Mark() {
+	}
+
+	public Boolean getResend() {
+		return resend;
+	}
+
+	public void setResend(Boolean resend) {
+		this.resend = resend;
 	}
 
 	@Override
@@ -62,11 +72,11 @@ public class Mark {
 	public void setScore(Double score) {
 		this.score = score;
 	}
-	
+
 	public void setUser(User user) {
 		this.user = user;
 	}
-	
+
 	public User getUser() {
 		return user;
 	}
