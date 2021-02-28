@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.*;
 import org.springframework.validation.annotation.Validated;
+import javax.servlet.http.*;
+import java.util.*;
 
 @Controller
 public class MarksControllers {
@@ -22,8 +24,16 @@ public class MarksControllers {
 	@Autowired
 	private MarkValidator markValidator;
 
+	@Autowired
+	private HttpSession httpSession;
+
 	@RequestMapping("/mark/list")
 	public String getList(Model model) {
+//		Set<Mark> consultedList = (Set<Mark>) httpSession.getAttribute("consultedList");
+//		if (consultedList == null) {
+//			consultedList = new HashSet<Mark>();
+//		}
+//		model.addAttribute("consultedList", consultedList);
 		model.addAttribute("markList", marksService.getMarks());
 		return "mark/list";
 	}
