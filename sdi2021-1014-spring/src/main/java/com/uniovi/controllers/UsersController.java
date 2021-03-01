@@ -11,6 +11,8 @@ import org.springframework.security.core.context.*;
 import com.uniovi.validators.*;
 import org.springframework.validation.*;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.data.domain.*;
+import java.util.*;
 
 @Controller
 public class UsersController {
@@ -28,8 +30,15 @@ public class UsersController {
 	private SignUpFormValidator signUpFormValidator;
 
 	@RequestMapping("/user/list")
-	public String getListado(Model model) {
-		model.addAttribute("usersList", usersService.getUsers());
+	public String getListado(Model model, Pageable pageable,
+			@RequestParam(value = "", required = false) String searchText) {
+		Page<User> users = new PageImpl<User>(new LinkedList<User>());
+		if (searchText != null && !searchText.isEmpty())
+			users = usersService.searchUsersByNameAndSurname(pageable, searchText);
+		else
+			users = usersService.getUsers(pageable);
+		model.addAttribute("usersList", users.getContent());
+		model.addAttribute("page", users);
 		return "user/list";
 	}
 
