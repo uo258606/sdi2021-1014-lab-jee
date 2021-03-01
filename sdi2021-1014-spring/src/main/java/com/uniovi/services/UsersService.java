@@ -43,5 +43,12 @@ public class UsersService {
 		usersRepository.deleteById(id);
 	}
 
+	public List<User> searchUsersByNameAndSurname(String searchText) {
+		List<User> users = new ArrayList<User>();
+		searchText = "%" + searchText + "%";
+		users = usersRepository.searchByNameAndSurname(searchText);
+
+		return users;
+	}
 
 }
