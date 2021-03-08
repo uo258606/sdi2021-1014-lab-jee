@@ -90,4 +90,21 @@ public class PO_PrivateView extends PO_NavView {
 		PO_View.checkElement(driver, "text", "Detalles de la nota");
 		SeleniumUtils.esperarSegundos(driver, 1);
 	}
+	
+	static public void checkCanCreateUser(WebDriver driver) {
+		List<WebElement> elementos = PO_View.checkElement(driver, "free", "//li[contains(@id, 'users-menu')]/a");
+		elementos.get(0).click();
+		// Esperamos a aparezca la opción de añadir nota: //a[contains(@href,
+		// 'mark/add')]
+		elementos = PO_View.checkElement(driver, "free", "//a[contains(@href, 'user/add')]");
+		// Pinchamos en agregar Nota.
+		elementos.get(0).click();
+		// Ahora vamos a rellenar la nota. //option[contains(@value, '4')]
+		PO_View.checkElement(driver, "text", "Role");
+	}
+
+	public static void checkCanNotCreateUser(WebDriver driver) {
+		SeleniumUtils.EsperaCargaPaginaNoTexto(driver, "Gestión de Usuarios", PO_View.getTimeout());
+	}
+	
 }

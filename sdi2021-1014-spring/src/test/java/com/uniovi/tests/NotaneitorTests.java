@@ -156,20 +156,20 @@ public class NotaneitorTests {
 	// PRN. Loguearse con exito desde el ROl de Usuario, 99999990D, 123456
 	@Test
 	public void PR10() {
-		PO_PrivateView.loginForm(driver,"99999990A", "123456",  "Notas del usuario");
+		PO_PrivateView.loginForm(driver, "99999990A", "123456", "Notas del usuario");
 	}
 
 	// PRN. Loguearse con exito desde el ROl de Usuario, 99999990D, 123456
 	@Test
 	public void PR11() {
-		PO_PrivateView.loginForm(driver,"99999990A", "123456",  "Notas del usuario");
+		PO_PrivateView.loginForm(driver, "99999990A", "123456", "Notas del usuario");
 	}
 
 	// PR12. Loguearse, comprobar que se visualizan 4 filas de notas y desconectarse
 	// usando el rol de estudiante.
 	@Test
 	public void PR12() {
-		PO_PrivateView.loginForm(driver,"99999990A", "123456", "Notas del usuario");
+		PO_PrivateView.loginForm(driver, "99999990A", "123456", "Notas del usuario");
 		// Contamos el número de filas de notas
 		List<WebElement> elementos = SeleniumUtils.EsperaCargaPagina(driver, "free", "//tbody/tr",
 				PO_View.getTimeout());
@@ -183,9 +183,9 @@ public class NotaneitorTests {
 	// P13. Ver la lista de Notas.
 	@Test
 	public void PR13() {
-		//login
-		PO_PrivateView.loginForm(driver,"99999990A", "123456",  "Notas del usuario");
-		//vemos una nota
+		// login
+		PO_PrivateView.loginForm(driver, "99999990A", "123456", "Notas del usuario");
+		// vemos una nota
 		PO_PrivateView.viewMark(driver, "Nota A2");
 		// Ahora nos desconectamos
 		PO_PrivateView.clickOption(driver, "logout", "text", "Identifícate");
@@ -195,9 +195,9 @@ public class NotaneitorTests {
 	// P14. Esta prueba podría encapsularse mejor ...
 	@Test
 	public void PR14() {
-		//login
-		PO_PrivateView.loginForm(driver,"99999993D", "123456",  "99999993D");
-		//añadimos nueva nota
+		// login
+		PO_PrivateView.loginForm(driver, "99999993D", "123456", "99999993D");
+		// añadimos nueva nota
 		PO_PrivateView.addMark(driver, "Nota Nueva 1", "8");
 		// Ahora nos desconectamos
 		PO_PrivateView.clickOption(driver, "logout", "text", "Identifícate");
@@ -208,10 +208,30 @@ public class NotaneitorTests {
 	// PRN. Ver la lista de Notas.
 	@Test
 	public void PR15() {
-		//login
+		// login
 		PO_PrivateView.loginForm(driver, "99999993D", "123456", "99999993D");
-		//borrar notas
+		// borrar notas
 		PO_PrivateView.deleteMark(driver, "Nota Nueva 1");
+		// Ahora nos desconectamos
+		PO_PrivateView.clickOption(driver, "logout", "text", "Identifícate");
+	}
+
+	@Test
+	public void PR16() {
+		// login
+		PO_PrivateView.loginForm(driver, "99999988F", "123456", "99999988F");
+		//agregar usuario
+		PO_PrivateView.checkCanCreateUser(driver);
+		// Ahora nos desconectamos
+		PO_PrivateView.clickOption(driver, "logout", "text", "Identifícate");
+	}
+	
+	@Test
+	public void PR17() {
+		// login
+		PO_PrivateView.loginForm(driver, "99999990A", "123456", "Notas del usuario");
+		//agregar usuario
+		PO_PrivateView.checkCanNotCreateUser(driver);
 		// Ahora nos desconectamos
 		PO_PrivateView.clickOption(driver, "logout", "text", "Identifícate");
 	}

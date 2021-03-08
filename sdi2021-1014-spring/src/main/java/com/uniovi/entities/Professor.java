@@ -1,12 +1,18 @@
 package com.uniovi.entities;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-
+@Entity
+@Table(name = "professor")
 public class Professor {
 
-	
+	@Id
+	@GeneratedValue
 	Long ID;
-	String nif;
+	String dni;
 	String name;
 	String surname;
 	String categoria;
@@ -17,13 +23,12 @@ public class Professor {
 
 	@Override
 	public String toString() {
-		return "Professor [id=" + ID + ", nif=" + nif + ", name=" + name + ", surname=" + surname + ", categoria=" + categoria + "]";
+		return "Professor [id=" + ID + ", nif=" + dni + ", name=" + name + ", surname=" + surname + ", categoria=" + categoria + "]";
 	}
 
-	public Professor(Long id, String nif, String name, String surname, String categoria) {
+	public Professor(String nif, String name, String surname, String categoria) {
 		super();
-		this.ID = id;
-		this.nif = nif;
+		this.dni = nif;
 		this.name = name;
 		this.surname = surname;
 		this.categoria = categoria;
@@ -39,12 +44,12 @@ public class Professor {
 		ID = iD;
 	}
 
-	public String getNif() {
-		return nif;
+	public String getDni() {
+		return dni;
 	}
 
-	public void setNif(String nif) {
-		this.nif = nif;
+	public void setDni(String nif) {
+		this.dni = nif;
 	}
 
 	public String getName() {

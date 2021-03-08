@@ -1,5 +1,6 @@
 package com.uniovi.tests.pageobjects;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import java.util.List;
 import org.openqa.selenium.*;
@@ -31,7 +32,7 @@ public class PO_NavView extends PO_View {
 		// Esperamos a que sea visible un elemento concreto
 		elementos = SeleniumUtils.EsperaCargaPagina(driver, criterio, textoDestino, getTimeout());
 		// Tiene que haber un sólo elemento.
-		assertTrue(elementos.size() == 1);
+		assertEquals(elementos.size(), 1);
 	}
 
 	/**

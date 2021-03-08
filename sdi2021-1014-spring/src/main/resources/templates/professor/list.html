@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="fragments/head" />
+<body>
+	<!-- Barra de NavegaciÃ³n superior -->
+	<nav th:replace="fragments/nav" />
+	<div class="container">
+		<h2>Profesores</h2>
+		<form class="navbar-form" action="/professor/list">
+			<div class="form-group">
+				<input name="searchText" type="text" class="form-control" size="50"
+					placeholder="Buscar por nombre o apellido del profesor">
+			</div>
+			<button type="submit" class="btn btn-default">Buscar</button>
+		</form>
+		<p>Los profesores que actualmente figuran en el sistema son los
+			siguientes:</p>
+		<button type="button" id="updateButton" class="btn btn-default">Actualizar</button>
+		<script>
+			$("#updateButton").click(function() {
+				$("#tableProfessor").load('/professor/list/update');
+			});
+		</script>
+		<div class="table-responsive">
+			<table class="table table-hover" th:fragment="tableProfessor"
+				id="tableProfessor">
+				<thead>
+					<tr>
+						<th>DNI</th>
+						<th>Nombre</th>
+						<th>Apellidos</th>
+						<th>Categoría</th>
+						<th class="col-md-1"></th>
+						<th class="col-md-1"></th>
+						<th class="col-md-1"></th>
+						<th class="col-md-1"></th>
+						<th class="col-md-1"></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="prof : ${profsList}">
+						<td th:text="${prof.dni}">71888888X</td>
+						<td th:text="${prof.name}">Nombre</td>
+						<td th:text="${prof.surname}">Apellidos</td>
+						<td th:text="${prof.categoria}">Categoría</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<footer th:replace="fragments/pagination" />
+	</div>
+	<footer th:replace="fragments/footer" />
+</body>
+</html>
