@@ -3,7 +3,8 @@ package com.uniovi.tests.pageobjects;
 import static org.junit.Assert.assertTrue;
 import java.util.List;
 import org.openqa.selenium.*;
-import com.uniovi.tests.utils.SeleniumUtils;
+
+import com.uniovi.tests.util.SeleniumUtils;
 
 public class PO_RegisterView extends PO_NavView {
 	static public void fillForm(WebDriver driver, String dnip, String namep, String lastnamep, String passwordp,
